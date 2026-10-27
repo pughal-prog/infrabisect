@@ -287,12 +287,27 @@ func (g *gitSource) Revert(ctx context.Context, c model.Change, bad string) (str
 	if _, err := g.git(ctx, "worktree", "add", "-B", branch, wt, bad); err != nil {
 		return "", fmt.Errorf("create worktree: %w", err)
 	}
-	if _, err := execx.Output(ctx, wt, g.bin, "revert", "--no-edit", c.Version); err != nil {
+	args := append(g.identityArgs(ctx, wt), "revert", "--no-edit", c.Version)
+	if res, err := execx.Run(ctx, execx.Cmd{Name: g.bin, Dir: wt, Args: args}); err != nil {
 		_, _ = execx.Output(ctx, wt, g.bin, "revert", "--abort")
-		return "", fmt.Errorf("revert %s does not apply cleanly: %w", c.ShortVersion(), err)
+		if strings.Contains(res.Combined(), "CONFLICT") {
+			return "", fmt.Errorf("revert %s does not apply cleanly on %s; resolve it by hand", c.ShortVersion(), model.Short(bad))
+		}
+		return "", fmt.Errorf("git revert %s failed: %w", c.ShortVersion(), err)
 	}
 	return fmt.Sprintf("branch %s (worktree %s)\n  next: git -C %s push -u origin %s && gh pr create --head %s --fill",
 		branch, wt, quote(g.repo), branch, branch), nil
+}
+
+// identityArgs supplies a committer identity only when git has none, as on
+// fresh CI runners; a configured identity always wins.
+func (g *gitSource) identityArgs(ctx context.Context, dir string) []string {
+	_, aerr := execx.Output(ctx, dir, g.bin, "var", "GIT_AUTHOR_IDENT")
+	_, cerr := execx.Output(ctx, dir, g.bin, "var", "GIT_COMMITTER_IDENT")
+	if aerr == nil && cerr == nil {
+		return nil
+	}
+	return []string{"-c", "user.name=InfraBisect", "-c", "user.email=infrabisect@users.noreply.github.com"}
 }
 
 func quote(s string) string {

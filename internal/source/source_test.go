@@ -187,7 +187,18 @@ func TestGitStreamAndRender(t *testing.T) {
 		t.Fatalf("window changes = %+v", s.Changes)
 	}
 
-	// Revert prepares a branch in a separate worktree.
+	// Revert prepares a branch in a separate worktree, even on a machine
+	// with no git identity configured (fresh CI runners).
+	empty := filepath.Join(t.TempDir(), "gitconfig")
+	if err := os.WriteFile(empty, nil, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	t.Setenv("GIT_CONFIG_GLOBAL", empty)
+	t.Setenv("GIT_CONFIG_NOSYSTEM", "1")
+	for _, k := range []string{"GIT_AUTHOR_NAME", "GIT_AUTHOR_EMAIL", "GIT_COMMITTER_NAME", "GIT_COMMITTER_EMAIL", "EMAIL"} {
+		t.Setenv(k, "")
+		os.Unsetenv(k)
+	}
 	desc, err := g.Revert(ctx, s.Changes[0], s.Head)
 	if err != nil {
 		t.Fatal(err)
