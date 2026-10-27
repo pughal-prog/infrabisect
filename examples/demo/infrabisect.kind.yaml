@@ -1,0 +1,35 @@
+# Demo: the same incident, reproduced for real. Every candidate state is
+# applied to a throwaway kind cluster and must roll out. Needs Docker, kind
+# and kubectl. Run ./setup.sh first.
+version: 1
+workDir: .demo/work-kind
+
+sources:
+  - name: app
+    type: git
+    repo: .demo/repo
+    path: k8s
+    good: known-good
+
+  - name: flags
+    type: exec
+    list: sh flags.sh list
+    good: v0
+    render:
+      command: sh flags.sh render
+    remedy: sh flags.sh set {{prev}}
+
+environment:
+  type: kind
+  cluster: infrabisect-demo
+  # Pull once on the host and side-load, so states don't race image pulls.
+  loadImages:
+    - nginx:1.27-alpine
+    - nginx:1.27.3-alpine
+  timeout: 3m
+
+checks:
+  - name: rollout
+    type: rollout
+    namespaces: [demo]
+    timeout: 60s

@@ -1,0 +1,27 @@
+# Demo: find the bad change among 12 git commits and flag flips, with no
+# cluster at all. Run ./setup.sh first.
+version: 1
+workDir: .demo/work
+
+sources:
+  - name: app
+    type: git
+    repo: .demo/repo
+    path: k8s
+    good: known-good
+
+  - name: flags
+    type: exec
+    list: sh flags.sh list
+    good: v0
+    render:
+      command: sh flags.sh render
+    remedy: sh flags.sh set {{prev}}
+
+environment:
+  type: dry
+
+checks:
+  - name: probe-ports
+    type: command
+    run: sh check.sh

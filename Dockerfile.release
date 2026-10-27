@@ -1,0 +1,6 @@
+# Used by GoReleaser, which supplies the prebuilt binary.
+FROM alpine:3.20
+RUN apk add --no-cache git kubectl helm ca-certificates
+COPY infrabisect /usr/local/bin/infrabisect
+WORKDIR /work
+ENTRYPOINT ["infrabisect"]

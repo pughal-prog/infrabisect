@@ -1,0 +1,63 @@
+name: InfraBisect
+description: Find the infrastructure change that broke your system by bisecting git, Helm and custom change timelines.
+branding:
+  icon: git-commit
+  color: red
+
+inputs:
+  config:
+    description: Path to infrabisect.yaml
+    default: infrabisect.yaml
+  since:
+    description: Start of the incident window (RFC 3339 or a duration such as 6h)
+    default: ""
+  until:
+    description: End of the incident window
+    default: ""
+  version:
+    description: InfraBisect version to install (a tag such as v0.1.0, or latest)
+    default: latest
+  args:
+    description: Extra flags for "infrabisect run"
+    default: ""
+
+outputs:
+  status:
+    description: culprit-found, inconclusive, no-changes, not-reproducible, baseline-bad or error
+    value: ${{ steps.run.outputs.status }}
+  culprit:
+    description: The culprit change as source@version
+    value: ${{ steps.run.outputs.culprit }}
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-go@v5
+      with:
+        go-version: "1.23"
+        cache: false
+    - name: Install infrabisect
+      shell: bash
+      run: go install github.com/pughalan/infrabisect/cmd/infrabisect@${{ inputs.version }}
+    - name: Bisect
+      id: run
+      shell: bash
+      env:
+        CONFIG: ${{ inputs.config }}
+        SINCE: ${{ inputs.since }}
+        UNTIL: ${{ inputs.until }}
+        EXTRA: ${{ inputs.args }}
+      run: |
+        set +e
+        args=(run -c "$CONFIG" --report infrabisect-report.md --json infrabisect-report.json)
+        [ -n "$SINCE" ] && args+=(--since "$SINCE")
+        [ -n "$UNTIL" ] && args+=(--until "$UNTIL")
+        infrabisect "${args[@]}" $EXTRA
+        code=$?
+        status=$(sed -n 's/^  "status": "\(.*\)",$/\1/p' infrabisect-report.json | head -n1)
+        culprit=$(grep -A3 '"culprit"' infrabisect-report.json | sed -n 's/.*"source": "\(.*\)",/\1/p' | head -n1)
+        version=$(grep -A4 '"culprit"' infrabisect-report.json | sed -n 's/.*"version": "\(.*\)",/\1/p' | head -n1)
+        echo "status=$status" >> "$GITHUB_OUTPUT"
+        [ -n "$culprit" ] && echo "culprit=$culprit@$version" >> "$GITHUB_OUTPUT"
+        cat infrabisect-report.md >> "$GITHUB_STEP_SUMMARY"
+        exit $code
