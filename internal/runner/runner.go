@@ -10,14 +10,14 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/pughalan/infrabisect/internal/bisect"
-	"github.com/pughalan/infrabisect/internal/check"
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/env"
-	"github.com/pughalan/infrabisect/internal/execx"
-	"github.com/pughalan/infrabisect/internal/model"
-	"github.com/pughalan/infrabisect/internal/report"
-	"github.com/pughalan/infrabisect/internal/source"
+	"github.com/pughal-prog/infrabisect/internal/bisect"
+	"github.com/pughal-prog/infrabisect/internal/check"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/env"
+	"github.com/pughal-prog/infrabisect/internal/execx"
+	"github.com/pughal-prog/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/report"
+	"github.com/pughal-prog/infrabisect/internal/source"
 )
 
 // Runner owns one configured bisect.

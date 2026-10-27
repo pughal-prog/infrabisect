@@ -3,9 +3,9 @@ package env
 import (
 	"context"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/execx"
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/execx"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // execEnv delegates to user hooks: docker compose, a cloud sandbox account,

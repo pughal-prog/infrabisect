@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"math/bits"
 
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // Tester evaluates state k (0 = baseline, n = present).

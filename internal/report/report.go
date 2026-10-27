@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // Status values.

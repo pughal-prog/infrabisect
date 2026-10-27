@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/execx"
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/execx"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // SkipExitCode marks a state as untestable, as with `git bisect run`.

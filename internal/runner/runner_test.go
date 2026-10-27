@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/report"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/report"
 )
 
 // setup builds a repository where commit `culprit` (1-based, after the

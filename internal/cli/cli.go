@@ -11,9 +11,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/report"
-	"github.com/pughalan/infrabisect/internal/runner"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/report"
+	"github.com/pughal-prog/infrabisect/internal/runner"
 )
 
 // IO holds the process streams.
@@ -46,7 +46,7 @@ Commands:
   version    Print the version
 
 Run "infrabisect <command> -h" for command flags.
-Docs: https://github.com/pughalan/infrabisect
+Docs: https://github.com/pughal-prog/infrabisect
 `
 
 // Main runs the CLI and returns the process exit code.

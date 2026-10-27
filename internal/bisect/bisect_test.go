@@ -5,7 +5,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // oracle returns a tester where states >= culprit are bad and states in

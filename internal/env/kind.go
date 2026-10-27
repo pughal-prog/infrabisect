@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/execx"
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/execx"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // kindEnv replays each state into a throwaway Kubernetes-in-Docker

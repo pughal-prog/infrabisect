@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/execx"
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/execx"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // helmSource treats every revision of a Helm release as a change and

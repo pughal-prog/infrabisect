@@ -21,11 +21,11 @@ checksum:
 
 dockers:
   - image_templates:
-      - "ghcr.io/pughalan/infrabisect:{{ .Version }}"
-      - "ghcr.io/pughalan/infrabisect:latest"
+      - "ghcr.io/pughal-prog/infrabisect:{{ .Version }}"
+      - "ghcr.io/pughal-prog/infrabisect:latest"
     dockerfile: Dockerfile.release
     build_flag_templates:
-      - --label=org.opencontainers.image.source=https://github.com/pughalan/infrabisect
+      - --label=org.opencontainers.image.source=https://github.com/pughal-prog/infrabisect
       - --label=org.opencontainers.image.version={{ .Version }}
 
 changelog:

@@ -4,7 +4,7 @@ import "sort"
 
 var templates = map[string]string{
 	"kind": `# InfraBisect configuration - replays every candidate state in a kind cluster.
-# Reference: https://github.com/pughalan/infrabisect/blob/main/docs/configuration.md
+# Reference: https://github.com/pughal-prog/infrabisect/blob/main/docs/configuration.md
 version: 1
 
 # The incident window. Every source's baseline is its last version before

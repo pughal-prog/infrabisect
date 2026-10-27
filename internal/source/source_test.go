@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 func ts(h, m int) time.Time { return time.Date(2026, 10, 27, h, m, 0, 0, time.UTC) }

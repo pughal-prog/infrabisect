@@ -38,7 +38,7 @@ runs:
         cache: false
     - name: Install infrabisect
       shell: bash
-      run: go install github.com/pughalan/infrabisect/cmd/infrabisect@${{ inputs.version }}
+      run: go install github.com/pughal-prog/infrabisect/cmd/infrabisect@${{ inputs.version }}
     - name: Bisect
       id: run
       shell: bash

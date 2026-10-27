@@ -7,8 +7,8 @@
 Something broke after a day of 40 changes: Terraform applies, Helm upgrades, manifest commits, feature flags.<br>
 InfraBisect replays them in a throwaway environment and tells you **which one** did it, in about log₂(N) steps.
 
-[![ci](https://github.com/pughalan/infrabisect/actions/workflows/ci.yml/badge.svg)](https://github.com/pughalan/infrabisect/actions/workflows/ci.yml)
-[![Go Reference](https://pkg.go.dev/badge/github.com/pughalan/infrabisect.svg)](https://pkg.go.dev/github.com/pughalan/infrabisect)
+[![ci](https://github.com/pughal-prog/infrabisect/actions/workflows/ci.yml/badge.svg)](https://github.com/pughal-prog/infrabisect/actions/workflows/ci.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/pughal-prog/infrabisect.svg)](https://pkg.go.dev/github.com/pughal-prog/infrabisect)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 </div>
@@ -83,13 +83,13 @@ Teams line these up by hand in a Slack thread and guess.
 ## Install
 
 ```bash
-go install github.com/pughalan/infrabisect/cmd/infrabisect@latest
+go install github.com/pughal-prog/infrabisect/cmd/infrabisect@latest
 ```
 
-Or download a binary from [Releases](https://github.com/pughalan/infrabisect/releases), or use the container image:
+Or download a binary from [Releases](https://github.com/pughal-prog/infrabisect/releases), or use the container image:
 
 ```bash
-docker run --rm -v "$PWD:/work" ghcr.io/pughalan/infrabisect run
+docker run --rm -v "$PWD:/work" ghcr.io/pughal-prog/infrabisect run
 ```
 
 ## Try it in 30 seconds
@@ -97,7 +97,7 @@ docker run --rm -v "$PWD:/work" ghcr.io/pughalan/infrabisect run
 The repo ships a realistic incident. It has 8 manifest commits and 4 feature-flag changes, and one of them quietly points a readiness probe at the wrong port:
 
 ```bash
-git clone https://github.com/pughalan/infrabisect && cd infrabisect
+git clone https://github.com/pughal-prog/infrabisect && cd infrabisect
 make demo                      # static checks, no cluster needed
 make demo-kind                 # the same incident in a real kind cluster
 ```
@@ -185,7 +185,7 @@ Exit codes: `0` culprit found, `2` inconclusive / not reproducible, `3` no chang
 Bisect automatically when a nightly environment check fails, and put the report in the job summary:
 
 ```yaml
-- uses: pughalan/infrabisect@v0
+- uses: pughal-prog/infrabisect@v0
   id: bisect
   with:
     config: infrabisect.yaml

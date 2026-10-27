@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/pughalan/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/config"
 )
 
 func run(args ...string) (int, string, string) {

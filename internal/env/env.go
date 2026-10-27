@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // Environment reproduces states. Prepare and Cleanup run once per bisect;

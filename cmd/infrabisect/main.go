@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/pughalan/infrabisect/internal/cli"
+	"github.com/pughal-prog/infrabisect/internal/cli"
 )
 
 // Set by the release build via -ldflags "-X main.version=...".

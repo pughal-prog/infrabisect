@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pughalan/infrabisect/internal/config"
-	"github.com/pughalan/infrabisect/internal/model"
+	"github.com/pughal-prog/infrabisect/internal/config"
+	"github.com/pughal-prog/infrabisect/internal/model"
 )
 
 // Window bounds the incident. Zero times are unbounded.

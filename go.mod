@@ -1,4 +1,4 @@
-module github.com/pughalan/infrabisect
+module github.com/pughal-prog/infrabisect
 
 go 1.23
 
